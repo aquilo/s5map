@@ -67,9 +67,17 @@
               // Create an img element for the marker
               var el = document.createElement('div');
               el.id = 'marker-' + i;
-              el.className = 'marker';
+              if (marker.properties.Obj_Funktion == "Wohnen") {
+                el.className = 'markerwohnen';
+              } else if (marker.properties.Obj_Funktion == "Kultur") {
+                el.className = 'markerkultur';
+              } else {
+                el.className = 'marker';
+              }
               el.style.left = '-28px';
               el.style.top = '-46px';
+              el.style.left = '-24px';
+              el.style.top = '-56px';
               // Add markers to the map at all points
               new mapboxgl.Marker(el)
                   .setLngLat(marker.geometry.coordinates)
@@ -95,6 +103,8 @@
 
       });
               buildLocationList(data);
+
+              
           });
 
           // This is where your '.addLayer()' used to be

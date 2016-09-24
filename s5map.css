@@ -97,7 +97,7 @@
           border-radius:0;
         }
 
-        .marker {
+        .marker0 {
           border: none;
           cursor: pointer;
           height: 56px;
@@ -105,6 +105,36 @@
           background-image: url(marker.png);
           background-color: rgba(0, 0, 0, 0);
           transform: translate(28px, 56px, 0);
+        }
+
+        .marker {
+          border: none;
+          cursor: pointer;
+          height: 48px;
+          width: 48px;
+          background-image: url(marker.png);
+          background-color: rgba(0, 0, 0, 0);
+          transform: translate(24px, 48px, 0);
+        }
+
+        .markerwohnen {
+          border: none;
+          cursor: pointer;
+          height: 48px;
+          width: 48px;
+          background-image: url(markerwohnen.png);
+          background-color: rgba(0, 0, 0, 0);
+          transform: translate(24px, 48px, 0);
+        }
+
+        .markerkultur {
+          border: none;
+          cursor: pointer;
+          height: 48px;
+          width: 48px;
+          background-image: url(markerkultur.png);
+          background-color: rgba(0, 0, 0, 0);
+          transform: translate(24px, 48px, 0);
         }
 
         .clearfix { display:block; }
