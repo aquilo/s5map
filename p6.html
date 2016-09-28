@@ -169,8 +169,9 @@
 
 		  var link = "";
 		  if (currentFeature.properties.Link !== '') {
-		  		link = '<p><a href="' + currentFeature.properties.Link + '" target="_blank">→ Link</a></p>';
+		  		link = '<p><a href="' + currentFeature.properties.Link + '" target="_blank">→ Link</a>';
 		  }
+		  details = '<a href="details.php?id=' + currentFeature.properties.ID + '" target="_blank">→ Details</a></p>';
 
 		  var popup = new mapboxgl.Popup({
 					 closeOnClick: false
@@ -179,7 +180,7 @@
 				.setHTML('<h3>' + currentFeature.properties.Obj_Name + ', ' + currentFeature.properties.Obj_Gem + '</h3>' +
 					 '<h4>' + currentFeature.properties['Obj_Funktion'] + '</h4>' +
 					 '<p>' + currentFeature.properties.Obj_Qualitaet + '</p>' + 
-					 '<p>' + currentFeature.properties.Kommentar + '</p>' + link 
+					 '<p>' + currentFeature.properties.Kommentar + '</p>' + link  + "&nbsp;&nbsp;&nbsp;" + details
 					)
 				.addTo(map);
 	 }
