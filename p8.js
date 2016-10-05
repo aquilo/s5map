@@ -161,7 +161,7 @@ var stores = $.ajax({
     label.textContent = 'Satellit';
     layerGroup.appendChild(label);
 
-   map.addSource("route", {
+    map.addSource("route", {
         "type": "geojson",
         "data": s5strecke
     });
@@ -183,9 +183,35 @@ var stores = $.ajax({
     var inputs = layerList.getElementsByTagName('input');
 
     function switchLayer(layer) {
+    map.addLayer({
+        "id": "route",
+        "type": "line",
+        "source": "route",
+        "layout": {
+            "line-join": "round",
+            "line-cap": "round"
+        },
+        "paint": {
+            "line-color": "#f88",
+            "line-width": 5
+        }
+    });
         var layerId = layer.target.id;
         map.setStyle('mapbox://styles/mapbox/' + layerId + '-v9');
-    }
+     map.addLayer({
+        "id": "route",
+        "type": "line",
+        "source": "route",
+        "layout": {
+            "line-join": "round",
+            "line-cap": "round"
+        },
+        "paint": {
+            "line-color": "#f88",
+            "line-width": 5
+        }
+    });
+   }
 
     for (var i = 0; i < inputs.length; i++) {
         inputs[i].onclick = switchLayer;
@@ -220,7 +246,7 @@ function createPopUp(currentFeature) {
     .setLngLat(currentFeature.geometry.coordinates)
     .setHTML('<h3>' + currentFeature.properties.Obj_Name + ', ' + currentFeature.properties.Obj_Gem + '</h3>' +
       '<h4>' + currentFeature.properties['Obj_Funktion'] + '</h4>' +
-      '<p>' + currentFeature.properties.Obj_Qualitaet + '</p>' +
+      '<p>' + currentFeature.properties.Obj_Qua1 + '</p>' +
       '<p>' + currentFeature.properties.Kommentar + '</p>' + link + '&nbsp;&nbsp;&nbsp;' + details
     )
     .addTo(map);
