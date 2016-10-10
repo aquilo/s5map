@@ -46,3 +46,12 @@
   margin-right: 5px;
 }
 
+label.f1 {
+  background-color: rgb(247, 203, 159) !important;
+}
+label.f2 {
+  background-color: rgb(166, 195, 242) !important;
+}
+label.f3 {
+  background-color: rgb(148, 195, 128) !important;
+}
