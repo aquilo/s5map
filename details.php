@@ -130,7 +130,14 @@
       <div class="unify"><h3>Objekt-Informationen zu:</h3></div><br>
       <div class="unify"><h1><? echo $datai[1]; ?></h1></div><br>
      <div class="unify">
+     <? if ($datai[10]) { ?>
      <p><? echo $datai[10]; ?></p>
+     <? } ?>
+     <? if ($datai[18]) { ?>
+     <p><? echo $datai[18]; ?></p>
+     <? } ?>
+     <h3>Thema</h3>
+     <p><? echo $datai[9]; ?> <? echo $datai[13]; ?>, <? echo $datai[15]; ?> <? echo $datai[17]; ?>  </p>
      <h3>Adresse</h3>
      <p><? echo $datai[6]; ?> <? echo $datai[7]; ?>, <? echo $datai[5]; ?> <? echo $datai[4]; ?>  </p>
      <h3>Link</h3>
@@ -141,6 +148,9 @@
      <? } ?>
 
      <br><br><br><hr>
+<a href="details.php?id=<? echo ($id - 1) ?>">prev</a> &nbsp;
+<a href="details.php?id=<? echo ($id + 1) ?>">next</a>
+     <hr>
 <?
 
     echo '<table border="0">';

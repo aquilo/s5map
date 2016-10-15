@@ -1,20 +1,84 @@
 <!DOCTYPE html>
 <html>
-	<head>
-      <meta charset='utf-8' />
-      <title>S5-Map</title>
-	</head>
-	<body>
-		<ol>
-			<li><a href="p9.html">Variante 9</a> (Farben)</li>
-			<li><a href="p8.html">Variante 8</a> (css-Verbesserungen)</li>
-			<li><a href="p7.html">Variante 7</a> (Satellit, Verbesserung der Detailseite)</li>
-			<li><a href="p6.html">Variante 6</a> (wie 5, aber nur 1 Markertyp; zusätzlich "Details"-Link)</li>
-			<li><a href="p5.html">Variante 5</a> (Themen-Auswahl, funktioniert aber nicht; div. Markers, Popup-Kosmetik)</li>
-			<li><a href="p3.html">Variante 3</a> (eigene Daten!)</li>
-			<li><a href="p2.html">Variante 2</a> (Daten ausgelagert)</li>
-			<li><a href="p1.html">Variante 1</a> (Sweetgreen-Daten im S5-Raum, Originalbeispiel)</li>
-			<li><a href="https://www.mapbox.com/help/demos/gl-store-locator/step-five.html">Original</a></li>
-		</ol>
-	</body>
+
+<head>
+    <meta charset='utf-8' />
+    <title>Bauprojekte und Brennpunkte in der Stadtregion S5</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet'>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
+    <link href="s5map.css" rel="stylesheet">
+    <link href="s5mapfilter.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class='sidebar'>
+        <div class='heading'>
+        <table><tr><td><img src="s5verein.png" style="vertical-align:top" height="100"></td>
+            <td valign="top"><h1>Bauprojekte und Brennpunkte </h1></td></tr></table>
+        </div>
+        <div id='listings' class='listings'></div>
+    </div>
+    <div id='map' class='map'>
+        <div id='menu'>
+            <input id='bright' type='radio' name='rtoggle' value='bright' checked='checked'>
+            <label for='bright'>Karte</label>
+            <br>
+            <input id='satellite' type='radio' name='rtoggle' value='satellite'>
+            <label for='satellite'>Satellit</label>
+            <br>
+            <br>
+            <input id='basic' type='radio' name='rtoggle' value='basic'>
+            <label for='basic'>basic</label>
+            <br>
+            <input id='streets' type='radio' name='rtoggle' value='streets'>
+            <label for='streets'>streets</label>
+            <br>
+            <input id='light' type='radio' name='rtoggle' value='light'>
+            <label for='light'>light</label>
+            <br>
+            <input id='dark' type='radio' name='rtoggle' value='dark'>
+            <label for='dark'>dark</label>
+        </div>
+    </div>
+    <nav id='layer-group' class='layer-group'></nav>
+    <div class='filter-input'>
+        <input id='filter-input' type='text' name='filter' placeholder='Filter by name' />
+    </div>
+    <nav id="filter-group" class="filter-group">
+        <input type="checkbox" id="fkt-10" checked="checked">
+        <label for="fkt-10" class="f1">Wohnen</label>
+        <input type="checkbox" id="fkt-11" checked="checked">
+        <label for="fkt-11" class="f1">Bildung</label>
+        <input type="checkbox" id="fkt-12" checked="checked">
+        <label for="fkt-12" class="f1">Kultur</label>
+        <input type="checkbox" id="fkt-13" checked="checked">
+        <label for="fkt-13" class="f1">Sport</label>
+        <input type="checkbox" id="fkt-14" checked="checked">
+        <label for="fkt-14" class="f1">Gesundheit</label>
+        <input type="checkbox" id="fkt-1" checked="checked">
+        <label for="fkt-1" class="f2">Zentrumsbau</label>
+        <input type="checkbox" id="fkt-2" checked="checked">
+        <label for="fkt-2" class="f2">gemischte Nutzung</label>
+        <input type="checkbox" id="fkt-3" checked="checked">
+        <label for="fkt-3" class="f2">Gewerbe</label>
+        <input type="checkbox" id="fkt-4" checked="checked">
+        <label for="fkt-4" class="f2">Dienstleistungen / Verwaltung / Büro</label>
+        <input type="checkbox" id="fkt-5" checked="checked">
+        <label for="fkt-5" class="f2">Industrie</label>
+        <input type="checkbox" id="fkt-6" checked="checked">
+        <label for="fkt-6" class="f3">öffentlicher Aussenraum, Platz, Park</label>
+        <input type="checkbox" id="fkt-7" checked="checked">
+        <label for="fkt-7" class="f3">privater Aussenraum / Garten</label>
+        <input type="checkbox" id="fkt-8" checked="checked">
+        <label for="fkt-8" class="f3">Verkehrsbaute / -Anlage</label>
+        <input type="checkbox" id="fkt-9" checked="checked">
+        <label for="fkt-9" class="f3">Strassenraum</label>
+    </nav>
+    <script src="s5strecke.js"></script>
+    <script src="s5.js"></script>
+</body>
+
 </html>

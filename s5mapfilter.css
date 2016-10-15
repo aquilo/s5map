@@ -1,5 +1,5 @@
 .filter-group {
-  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font: 12px/16px 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: 600;
   position: absolute;
   top: 10px;
@@ -53,5 +53,14 @@ label.f2 {
   background-color: rgb(166, 195, 242) !important;
 }
 label.f3 {
+  background-color: rgb(148, 195, 128) !important;
+}
+a.f1 {
+  background-color: rgb(247, 203, 159) !important;
+}
+a.f2 {
+  background-color: rgb(166, 195, 242) !important;
+}
+a.f3 {
   background-color: rgb(148, 195, 128) !important;
 }
