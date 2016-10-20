@@ -12,8 +12,10 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2lqbmpqazdlMDBsdnRva284c
 
 // This adds the map
 var bounds = [
-    [8.466, 47.193], // Southwest coordinates
-    [8.905, 47.442] // Northeast coordinates
+//    [8.466, 47.193], // Southwest coordinates
+//    [8.905, 47.442] // Northeast coordinates
+    [8.2465, 47.0685], // Southwest coordinates
+    [9.1245, 47.5665] // Northeast coordinates
 ];
 var map = new mapboxgl.Map({
     // container id specified in the HTML
@@ -106,7 +108,26 @@ $.ajax({
         function doGroup0(e) {
             var how = e.target.checked ? '' : 'none';
             var groupnr = e.target.id.substr(4, e.target.id.length);
-            doGroup(groupnr, how);
+            if (groupnr == 91) {
+                doBigGroup([groupnr, 10, 11, 12, 13, 14], how);
+            } else if (groupnr == 92) {
+                doBigGroup([groupnr, 1, 2, 3, 4, 5], how);
+            } else if (groupnr == 93) {
+                doBigGroup([groupnr, 6, 7, 8, 9], how);
+            } else {
+                doGroup(groupnr, how);
+            }
+        }
+
+        function doBigGroup(grouparray, how) {
+            var howb = how != 'none';
+            for (var i = 0; i < grouparray.length; i++) {
+                doGroup(grouparray[i], how);
+                var c = document.getElementById('fkt-' + grouparray[i]);
+                if (c) {
+                    c.checked = howb;
+                }
+            }
         }
 
         function doGroup(groupnr, how) {
@@ -153,6 +174,18 @@ $.ajax({
                 var placenr = listing.id.substr(8, 99);
                 var marker = document.getElementById('marker-' + placenr);
                 marker.style.display = listing.style.display;
+            }
+        }
+
+        function updateListingElement(nr) {
+            var filterGroup = document.getElementById('filter-group').children;
+            for (var j = 0; j < filterGroup.length; j += 1) {
+                if (filterGroup[j].type == 'checkbox') {
+                    if (!filterGroup[j].checked) {
+                        var groupnr = filterGroup[j].id.substr(4, filterGroup[j].id.length);
+                        doGroup(groupnr, 'none');
+                    }
+                }
             }
         }
 

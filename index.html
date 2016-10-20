@@ -19,6 +19,9 @@
         <table><tr><td><img src="s5verein.png" style="vertical-align:top" height="100"></td>
             <td valign="top"><h1>Bauprojekte und Brennpunkte </h1></td></tr></table>
         </div>
+    <div class='filter-input'>
+        <input id='filter-input' type='text' name='filter' placeholder='Filtern der Liste' />
+    </div>
         <div id='listings' class='listings'></div>
     </div>
     <div id='map' class='map'>
@@ -44,37 +47,46 @@
         </div>
     </div>
     <nav id='layer-group' class='layer-group'></nav>
-    <div class='filter-input'>
-        <input id='filter-input' type='text' name='filter' placeholder='Filter by name' />
-    </div>
     <nav id="filter-group" class="filter-group">
-        <input type="checkbox" id="fkt-10" checked="checked">
+        <input type="checkbox" id="fkt-91" checked>
+        <label for="fkt-91" class="f91">Wohnen & Leben</label>
+
+        <input type="checkbox" id="fkt-10" checked>
         <label for="fkt-10" class="f1">Wohnen</label>
-        <input type="checkbox" id="fkt-11" checked="checked">
+
+        <input type="checkbox" id="fkt-11" checked>
         <label for="fkt-11" class="f1">Bildung</label>
-        <input type="checkbox" id="fkt-12" checked="checked">
+        <input type="checkbox" id="fkt-12" checked>
         <label for="fkt-12" class="f1">Kultur</label>
-        <input type="checkbox" id="fkt-13" checked="checked">
+        <input type="checkbox" id="fkt-13" checked>
         <label for="fkt-13" class="f1">Sport</label>
-        <input type="checkbox" id="fkt-14" checked="checked">
+        <input type="checkbox" id="fkt-14" checked>
         <label for="fkt-14" class="f1">Gesundheit</label>
-        <input type="checkbox" id="fkt-1" checked="checked">
+
+        <input type="checkbox" id="fkt-92" checked>
+        <label for="fkt-92" class="f92">Wirtschaft & Arbeit</label>
+
+        <input type="checkbox" id="fkt-1" checked>
         <label for="fkt-1" class="f2">Zentrumsbau</label>
-        <input type="checkbox" id="fkt-2" checked="checked">
+        <input type="checkbox" id="fkt-2" checked>
         <label for="fkt-2" class="f2">gemischte Nutzung</label>
-        <input type="checkbox" id="fkt-3" checked="checked">
+        <input type="checkbox" id="fkt-3" checked>
         <label for="fkt-3" class="f2">Gewerbe</label>
-        <input type="checkbox" id="fkt-4" checked="checked">
+        <input type="checkbox" id="fkt-4" checked>
         <label for="fkt-4" class="f2">Dienstleistungen / Verwaltung / Büro</label>
-        <input type="checkbox" id="fkt-5" checked="checked">
+        <input type="checkbox" id="fkt-5" checked>
         <label for="fkt-5" class="f2">Industrie</label>
-        <input type="checkbox" id="fkt-6" checked="checked">
+
+        <input type="checkbox" id="fkt-93" checked>
+        <label for="fkt-93" class="f93">Aussenraum & Verkehr</label>
+
+        <input type="checkbox" id="fkt-6" checked>
         <label for="fkt-6" class="f3">öffentlicher Aussenraum, Platz, Park</label>
-        <input type="checkbox" id="fkt-7" checked="checked">
+        <input type="checkbox" id="fkt-7" checked>
         <label for="fkt-7" class="f3">privater Aussenraum / Garten</label>
-        <input type="checkbox" id="fkt-8" checked="checked">
+        <input type="checkbox" id="fkt-8" checked>
         <label for="fkt-8" class="f3">Verkehrsbaute / -Anlage</label>
-        <input type="checkbox" id="fkt-9" checked="checked">
+        <input type="checkbox" id="fkt-9" checked>
         <label for="fkt-9" class="f3">Strassenraum</label>
     </nav>
     <script src="s5strecke.js"></script>

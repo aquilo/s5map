@@ -55,6 +55,18 @@ label.f2 {
 label.f3 {
   background-color: rgb(148, 195, 128) !important;
 }
+label.f91 {
+  color: black;
+  background-color: rgb(247, 203, 159) !important;
+}
+label.f92 {
+  color: black;
+  background-color: rgb(166, 195, 242) !important;
+}
+label.f93 {
+  color: black;
+  background-color: rgb(148, 195, 128) !important;
+}
 a.f1 {
   background-color: rgb(247, 203, 159) !important;
 }

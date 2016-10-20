@@ -431,12 +431,16 @@ a:hover {
     color: #fff;
 }
 
-.filter-input {
+.filter-inputxx {
     position: absolute;
     top: 10px;
     right: 165px;
     z-index: 1;
     width: 180px;
+}
+
+.filter-input {
+    padding: 12px 6px 6px 6px;
 }
 
 .filter-input input[type=text] {
