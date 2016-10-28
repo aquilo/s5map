@@ -12,8 +12,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2lqbmpqazdlMDBsdnRva284c
 
 // This adds the map
 var bounds = [
-//    [8.466, 47.193], // Southwest coordinates
-//    [8.905, 47.442] // Northeast coordinates
+    //    [8.466, 47.193], // Southwest coordinates
+    //    [8.905, 47.442] // Northeast coordinates
     [8.2465, 47.0685], // Southwest coordinates
     [9.1245, 47.5665] // Northeast coordinates
 ];
@@ -139,9 +139,48 @@ $.ajax({
             updateMarkersFromListing();
         }
 
-        var filterGroup = document.getElementById('filter-group').children;
+        var filterGroup = document.getElementById('fktfilter').children;
         for (var j = 0; j < filterGroup.length; j++) {
             filterGroup[j].addEventListener('change', doGroup0);
+        }
+
+        function doQualiGroup(e) {
+            var how = e.target.checked ? '' : 'none';
+            var groupnr = e.target.id.substr(6, e.target.id.length);
+            if (groupnr == 91) {
+                var listings = document.getElementById('listings').children;
+                for (var i = 0; i < listings.length; i++) {
+                    listings[i].style.display = how;
+                }
+                            var howb = how != 'none';
+
+                listings = document.getElementById('qualis').children;
+                for (var i = 0; i < listings.length; i++) {
+                    listings[i].checked = howb;
+                }
+            } else {
+
+
+                if (!groupnr || groupnr == "") return
+                var listings = document.querySelectorAll("[data-qualilis1='" + groupnr + "']");
+                for (var i = 0; i < listings.length; i++) {
+                    listings[i].style.display = how;
+                }
+                listings = document.querySelectorAll("[data-qualilis2='" + groupnr + "']");
+                for (var i = 0; i < listings.length; i++) {
+                    listings[i].style.display = how;
+                }
+                listings = document.querySelectorAll("[data-qualilis3='" + groupnr + "']");
+                for (var i = 0; i < listings.length; i++) {
+                    listings[i].style.display = how;
+                }
+            }
+            updateMarkersFromListing();
+        }
+
+        var filterQualiGroup = document.getElementById('qualifilter').children;
+        for (var j = 0; j < filterQualiGroup.length; j++) {
+            filterQualiGroup[j].addEventListener('change', doQualiGroup);
         }
 
         /*       for (var j = 0; j < listings.length; j++) {
@@ -178,7 +217,7 @@ $.ajax({
         }
 
         function updateListingElement(nr) {
-            var filterGroup = document.getElementById('filter-group').children;
+            var filterGroup = document.getElementById('fktfilter').children;
             for (var j = 0; j < filterGroup.length; j += 1) {
                 if (filterGroup[j].type == 'checkbox') {
                     if (!filterGroup[j].checked) {
@@ -201,7 +240,7 @@ $.ajax({
         }
 
         function updateListingFromFilterGroup() {
-            var filterGroup = document.getElementById('filter-group').children;
+            var filterGroup = document.getElementById('fktfilter').children;
             for (var j = 0; j < filterGroup.length; j += 1) {
                 if (filterGroup[j].type == 'checkbox') {
                     if (!filterGroup[j].checked) {
@@ -323,6 +362,9 @@ function buildLocationList(places) {
         listing.className = 'item';
         listing.id = 'listing-' + i;
         listing.setAttribute('data-fktlis', prop.OBJ_Fun_ID);
+        listing.setAttribute('data-qualilis1', prop.Obj_Qua1_ID);
+        listing.setAttribute('data-qualilis2', prop.Obj_Qua2_ID);
+        listing.setAttribute('data-qualilis3', prop.Obj_Qua3_ID);
         listing.setAttribute('data-lng', currentFeature.geometry.coordinates[0]);
         listing.setAttribute('data-lat', currentFeature.geometry.coordinates[1]);
 

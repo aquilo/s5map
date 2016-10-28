@@ -8,20 +8,77 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet'>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
     <link href="s5map.css" rel="stylesheet">
     <link href="s5mapfilter.css" rel="stylesheet">
+    <script>
+    $(function() {
+
+        $('#qualifilter').draggable({
+            stop: function(event, ui) {
+                // event.toElement is the element that was responsible
+                // for triggering this event. The handle, in case of a draggable.
+                $(event.toElement).one('click', function(e) {
+                    e.stopImmediatePropagation();
+                });
+            }
+        });
+
+        $('#fktfilter').draggable({
+            stop: function(event, ui) {
+                // event.toElement is the element that was responsible
+                // for triggering this event. The handle, in case of a draggable.
+                $(event.toElement).one('click', function(e) {
+                    e.stopImmediatePropagation();
+                });
+            }
+        });
+
+
+        $("#menu").draggable();
+
+        $(".fktheader").click(function() {
+            $header = $(this);
+            $content = $header.next();
+            $content.slideToggle(500, function() {
+                $header.text(function() {
+                    return $content.is(":visible") ? "  x  Filtern nach Funktion" : "  +  Filtern nach Funktion";
+                });
+            });
+
+        });
+
+        $(".qualiheader").click(function() {
+            $header = $(this);
+            $content = $header.next();
+            $content.slideToggle(500, function() {
+                $header.text(function() {
+                    return $content.is(":visible") ? "  x  Filtern nach Qualität" : "  +  Filtern nach Qualität";
+                });
+            });
+
+        });
+
+    });
+    </script>
 </head>
 
 <body>
     <div class='sidebar'>
         <div class='heading'>
-        <table><tr><td><img src="s5verein.png" style="vertical-align:top" height="100"></td>
-            <td valign="top"><h1>Bauprojekte und Brennpunkte </h1></td></tr></table>
+            <table>
+                <tr>
+                    <td><img src="s5verein.png" style="vertical-align:top" height="100"></td>
+                    <td valign="top">
+                        <h1>Bauprojekte und Brennpunkte </h1></td>
+                </tr>
+            </table>
         </div>
-    <div class='filter-input'>
-        <input id='filter-input' type='text' name='filter' placeholder='Filtern der Liste' />
-    </div>
+        <div class='filter-input'>
+            <input id='filter-input' type='text' name='filter' placeholder='Filtern der Liste' />
+        </div>
         <div id='listings' class='listings'></div>
     </div>
     <div id='map' class='map'>
@@ -47,47 +104,93 @@
         </div>
     </div>
     <nav id='layer-group' class='layer-group'></nav>
-    <nav id="filter-group" class="filter-group">
-        <input type="checkbox" id="fkt-91" checked>
-        <label for="fkt-91" class="f91">Wohnen & Leben</label>
-
-        <input type="checkbox" id="fkt-10" checked>
-        <label for="fkt-10" class="f1">Wohnen</label>
-
-        <input type="checkbox" id="fkt-11" checked>
-        <label for="fkt-11" class="f1">Bildung</label>
-        <input type="checkbox" id="fkt-12" checked>
-        <label for="fkt-12" class="f1">Kultur</label>
-        <input type="checkbox" id="fkt-13" checked>
-        <label for="fkt-13" class="f1">Sport</label>
-        <input type="checkbox" id="fkt-14" checked>
-        <label for="fkt-14" class="f1">Gesundheit</label>
-
-        <input type="checkbox" id="fkt-92" checked>
-        <label for="fkt-92" class="f92">Wirtschaft & Arbeit</label>
-
-        <input type="checkbox" id="fkt-1" checked>
-        <label for="fkt-1" class="f2">Zentrumsbau</label>
-        <input type="checkbox" id="fkt-2" checked>
-        <label for="fkt-2" class="f2">gemischte Nutzung</label>
-        <input type="checkbox" id="fkt-3" checked>
-        <label for="fkt-3" class="f2">Gewerbe</label>
-        <input type="checkbox" id="fkt-4" checked>
-        <label for="fkt-4" class="f2">Dienstleistungen / Verwaltung / Büro</label>
-        <input type="checkbox" id="fkt-5" checked>
-        <label for="fkt-5" class="f2">Industrie</label>
-
-        <input type="checkbox" id="fkt-93" checked>
-        <label for="fkt-93" class="f93">Aussenraum & Verkehr</label>
-
-        <input type="checkbox" id="fkt-6" checked>
-        <label for="fkt-6" class="f3">öffentlicher Aussenraum, Platz, Park</label>
-        <input type="checkbox" id="fkt-7" checked>
-        <label for="fkt-7" class="f3">privater Aussenraum / Garten</label>
-        <input type="checkbox" id="fkt-8" checked>
-        <label for="fkt-8" class="f3">Verkehrsbaute / -Anlage</label>
-        <input type="checkbox" id="fkt-9" checked>
-        <label for="fkt-9" class="f3">Strassenraum</label>
+    <nav id="qualifilter" class="qualifilter">
+        <div class="qualicontainer">
+            <div class="qualiheader filterheader"><span>  +  Filtern nach Qualität</span></div>
+            <div class="qualicontent" id="qualis">
+                <input type="checkbox" id="quali-91" checked>
+                <label for="quali-91" class="f91">Alle</label>
+                <input type="checkbox" id="quali-1" checked>
+                <label for="quali-1" class="quali">Ortsbild / Städtebau</label>
+                <input type="checkbox" id="quali-2" checked>
+                <label for="quali-2" class="quali">Verdichtung / Nachverdichtung</label>
+                <input type="checkbox" id="quali-3" checked>
+                <label for="quali-3" class="quali">Aussenraum- Qualitäten (privat/öffentlich)</label>
+                <input type="checkbox" id="quali-4" checked>
+                <label for="quali-4" class="quali">Raum-Qualität Wohnen</label>
+                <input type="checkbox" id="quali-5" checked>
+                <label for="quali-5" class="quali">Ästhetik (Architektur)</label>
+                <input type="checkbox" id="quali-6" checked>
+                <label for="quali-6" class="quali">Sozialräumliche Qualität</label>
+                <input type="checkbox" id="quali-7" checked>
+                <label for="quali-7" class="quali">Funktion als Treffpunkt, Begegnungsort</label>
+                <input type="checkbox" id="quali-8" checked>
+                <label for="quali-8" class="quali">Bildung von Nachbarschaften</label>
+                <input type="checkbox" id="quali-9" checked>
+                <label for="quali-9" class="quali">Mix von gemeinschaftlichem, privatem, öffentlichem Raum</label>
+                <input type="checkbox" id="quali-10" checked>
+                <label for="quali-10" class="quali">Qualität des Nutzungsmix</label>
+                <input type="checkbox" id="quali-11" checked>
+                <label for="quali-11" class="quali">Mobilitätskonzept / Verkehrserschliessung</label>
+                <input type="checkbox" id="quali-12" checked>
+                <label for="quali-12" class="quali">Energiebilanz</label>
+                <input type="checkbox" id="quali-13" checked>
+                <label for="quali-13" class="quali">Qualität des Verfahrens</label>
+                <input type="checkbox" id="quali-14" checked>
+                <label for="quali-14" class="quali">Mitwirkungsprozess</label>
+                <input type="checkbox" id="quali-15" checked>
+                <label for="quali-15" class="quali">Partnerschaft privat-öffentlich</label>
+                <input type="checkbox" id="quali-16" checked>
+                <label for="quali-16" class="quali">Denkmalschutz</label>
+                <input type="checkbox" id="quali-17" checked>
+                <label for="quali-17" class="quali">Umnutzung</label>
+                <input type="checkbox" id="quali-18" checked>
+                <label for="quali-18" class="quali">Renovation</label>
+                <input type="checkbox" id="quali-19" checked>
+                <label for="quali-19" class="quali">Sonstiges</label>
+            </div>
+        </div>
+    </nav>
+    <nav id="fktfilter" class="fktfilter">
+        <div class="fktcontainer">
+            <div class="fktheader filterheader"><span>  +  Filtern nach Funktion</span></div>
+            <div class="fktcontent">
+                <input type="checkbox" id="fkt-91" checked>
+                <label for="fkt-91" class="f91">Wohnen & Leben</label>
+                <input type="checkbox" id="fkt-10" checked>
+                <label for="fkt-10" class="f1">Wohnen</label>
+                <input type="checkbox" id="fkt-11" checked>
+                <label for="fkt-11" class="f1">Bildung</label>
+                <input type="checkbox" id="fkt-12" checked>
+                <label for="fkt-12" class="f1">Kultur</label>
+                <input type="checkbox" id="fkt-13" checked>
+                <label for="fkt-13" class="f1">Sport</label>
+                <input type="checkbox" id="fkt-14" checked>
+                <label for="fkt-14" class="f1">Gesundheit</label>
+                <input type="checkbox" id="fkt-92" checked>
+                <label for="fkt-92" class="f92">Wirtschaft & Arbeit</label>
+                <input type="checkbox" id="fkt-1" checked>
+                <label for="fkt-1" class="f2">Zentrumsbau</label>
+                <input type="checkbox" id="fkt-2" checked>
+                <label for="fkt-2" class="f2">gemischte Nutzung</label>
+                <input type="checkbox" id="fkt-3" checked>
+                <label for="fkt-3" class="f2">Gewerbe</label>
+                <input type="checkbox" id="fkt-4" checked>
+                <label for="fkt-4" class="f2">Dienstleistungen / Verwaltung / Büro</label>
+                <input type="checkbox" id="fkt-5" checked>
+                <label for="fkt-5" class="f2">Industrie</label>
+                <input type="checkbox" id="fkt-93" checked>
+                <label for="fkt-93" class="f93">Aussenraum & Verkehr</label>
+                <input type="checkbox" id="fkt-6" checked>
+                <label for="fkt-6" class="f3">öffentlicher Aussenraum, Platz, Park</label>
+                <input type="checkbox" id="fkt-7" checked>
+                <label for="fkt-7" class="f3">privater Aussenraum / Garten</label>
+                <input type="checkbox" id="fkt-8" checked>
+                <label for="fkt-8" class="f3">Verkehrsbaute / -Anlage</label>
+                <input type="checkbox" id="fkt-9" checked>
+                <label for="fkt-9" class="f3">Strassenraum</label>
+            </div>
+        </div>
     </nav>
     <script src="s5strecke.js"></script>
     <script src="s5.js"></script>
