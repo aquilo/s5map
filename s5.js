@@ -8,6 +8,13 @@ if (!('remove' in Element.prototype)) {
     };
 }
 
+function truncate( n, useWordBoundary ){
+    var isTooLong = this.length > n,
+        s_ = isTooLong ? this.substr(0,n-1) : this;
+        s_ = (useWordBoundary && isTooLong) ? s_.substr(0,s_.lastIndexOf(' ')) : s_;
+    return  isTooLong ? s_ + '&hellip;' : s_;
+};
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2lqbmpqazdlMDBsdnRva284cWd3bm11byJ9.V6Hg2oYJwMAxeoR9GEzkAA';
 
 // This adds the map
@@ -324,6 +331,11 @@ function createPopUp(currentFeature) {
     var popUps = document.getElementsByClassName('mapboxgl-popup');
     if (popUps[0]) popUps[0].remove();
 
+    var img = '';
+    if (currentFeature.properties.Fotodatei !== '') {
+        img = '<img src="Bilder180/' + currentFeature.properties.Fotodatei + '" width="180" height="120">';
+    }
+
     var link = '';
     if (currentFeature.properties.Link !== '') {
         link = '<p><a href="' + currentFeature.properties.Link + '" target="_blank">→ Link</a>';
@@ -334,10 +346,13 @@ function createPopUp(currentFeature) {
             closeOnClick: false
         })
         .setLngLat(currentFeature.geometry.coordinates)
-        .setHTML('<h3>' + currentFeature.properties.Obj_Name + ', ' + currentFeature.properties.Obj_Gem + '</h3>' +
-            '<h4>' + currentFeature.properties.Obj_Funktion + '</h4>' +
-            '<p>' + currentFeature.properties.Obj_Qua1 + '</p>' +
-            '<p>' + currentFeature.properties.Kommentar + '</p>' + link + '&nbsp;&nbsp;&nbsp;' + details
+        .setHTML(img +
+            '<h3>' + currentFeature.properties.Obj_Name + ', ' + currentFeature.properties.Obj_Gem + '</h3>' +
+            '<p style="font-size: 14px; color: #AABB1D">Funktion</p>' +
+            '<p style="font-size: 14px">' + currentFeature.properties.Obj_Funktion + '</p>' +
+            '<p style="font-size: 13px">' + currentFeature.properties.Obj_Qua1 + ' | ' + currentFeature.properties.Obj_Qua2 + ' | ' + currentFeature.properties.Obj_Qua2 + '</p>' +
+            '<p style="font-size: 14px; color: #AABB1D">Kommentar</p>' +
+            '<p style="font-size: 14px">' + truncate.apply(currentFeature.properties.Kommentar, [45, true]) + '</p>' + link + '&nbsp;&nbsp;&nbsp;' + details
         )
         .addTo(map);
 }

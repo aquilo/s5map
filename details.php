@@ -128,24 +128,32 @@
    <article> 
       <div class="unify"><h2>Sammlung von Bauprojekten und Brennpunkten</h2></div><br>
       <div class="unify"><h3>Objekt-Informationen zu:</h3></div><br>
-      <div class="unify"><h1><? echo $datai[1]; ?></h1></div><br>
+      <div class="unify"><h2 style="margin-bottom: 4px"><? echo $datai[1]; ?></h2></div>
+      <p><? echo $datai[6]; ?> <? echo $datai[7]; ?>, <? echo $datai[5]; ?> <? echo $datai[4]; ?>  </p>
      <div class="unify">
-     <? if ($datai[10]) { ?>
-     <p><? echo $datai[10]; ?></p>
-     <? } ?>
      <? if ($datai[18]) { ?>
+     <h3>Funktion</h3>
+     <p><? echo $datai[9]; ?></p>
+     <? } ?>
+     <h3>Besondere Qualität</h3>
+     <p><? echo $datai[13]; ?>, <? echo $datai[15]; ?> <? echo $datai[17]; ?>  </p>     
+     <? if ($datai[18]) { ?>
+     <h3>Kommentar</h3>
      <p><? echo $datai[18]; ?></p>
      <? } ?>
-     <h3>Thema</h3>
-     <p><? echo $datai[9]; ?> <? echo $datai[13]; ?>, <? echo $datai[15]; ?> <? echo $datai[17]; ?>  </p>
-     <h3>Adresse</h3>
-     <p><? echo $datai[6]; ?> <? echo $datai[7]; ?>, <? echo $datai[5]; ?> <? echo $datai[4]; ?>  </p>
-     <h3>Link</h3>
-     <p><a href="<? echo $datai[20]; ?>" target="_blank">weitere Infos ...></a>  </p>
 
      <? if ($datai[11]) { ?>
-     <br><img src="/images/<? echo $datai[11]; ?>">
+     <img src="/Bilder630/<? echo $datai[11]; ?>"><br> <br>
      <? } ?>
+     <? if ($datai[10]) { ?>
+    <p><? echo $datai[10]; ?></p>
+     <? } ?>
+
+     <p><a href="<? echo $datai[20]; ?>" target="_blank" style="color: #AABB1D;">Link zu weiteren Informationen</a>  </p>
+
+     <p>Erfasst am <? echo date("d.m.Y", 60*60*24*($datai[29] - 25569)); ?></p>
+
+
 
      <br><br><br><hr>
 <a href="details.php?id=<? echo ($id - 1) ?>">prev</a> &nbsp;
