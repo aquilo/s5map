@@ -334,7 +334,12 @@ a:hover {
 }
 
 .mapboxgl-popup-close-button {
-    display: none;
+    display: block;
+    font-size: 20px;
+    color: white;
+    background: rgba(0,0,0,0.5);
+    margin-top: 0px;
+    padding: 0;
 }
 
 .mapboxgl-popup-content {
@@ -353,9 +358,9 @@ a:hover {
     margin: 0;
     display: block;
     padding: 10px;
-    border-radius: 3px 3px 0 0;
+    border-radius: 0;
     font-weight: 700;
-    margin-top: -15px;
+    margin-top: -5px;
     line-height: 18px;
 }
 
@@ -367,13 +372,24 @@ a:hover {
     margin: 0;
 }
 
+.mapboxgl-popup-content h5 {
+color: #AABB1D;
+   margin: 0;
+    display: block;
+    padding: 4px 4px 0px 4px;
+    font-weight: 500;
+    margin: 0;
+    font-size: 14px;
+    line-height: 18px;
+}
+
 .mapboxgl-popup-content p {
     margin: 0;
     display: block;
-    padding: 10px 10px 0px 10px;
+    padding: 4px 4px 0px 4px;
     font-weight: 300;
     margin: 0;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 18px;
 }
 
@@ -409,7 +425,7 @@ a:hover {
 }
 
 .mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
-    margin-top: 15px;
+    margin-top: 1px;
 }
 
 .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {

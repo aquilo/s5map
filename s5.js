@@ -107,7 +107,8 @@ $.ajax({
                 "line-cap": "round"
             },
             "paint": {
-                "line-color": "#f88",
+//                "line-color": "#f88",
+                "line-color": "#AABB1D",
                 "line-width": 5
             }
         });
@@ -292,7 +293,7 @@ $.ajax({
                         "line-cap": "round"
                     },
                     "paint": {
-                        "line-color": "#f88",
+                        "line-color": "#AABB1D",
                         "line-width": 5
                     }
                 });
@@ -336,6 +337,15 @@ function createPopUp(currentFeature) {
         img = '<img src="Bilder180/' + currentFeature.properties.Fotodatei + '" width="180" height="120">';
     }
 
+    var besquali = currentFeature.properties.Obj_Qua1;
+    var greenbullet = ' <span style="font-size: 20px; font-weight: bold; color: #AABB1D"> &bullet; </span>';
+    if (currentFeature.properties.Obj_Qua2 !== '') {
+        besquali += greenbullet + currentFeature.properties.Obj_Qua2;
+    }
+    if (currentFeature.properties.Obj_Qua3 !== '') {
+        besquali += greenbullet + currentFeature.properties.Obj_Qua3;
+    }
+
     var link = '';
     if (currentFeature.properties.Link !== '') {
         link = '<p><a href="' + currentFeature.properties.Link + '" target="_blank">→ Link</a>';
@@ -348,11 +358,13 @@ function createPopUp(currentFeature) {
         .setLngLat(currentFeature.geometry.coordinates)
         .setHTML(img +
             '<h3>' + currentFeature.properties.Obj_Name + ', ' + currentFeature.properties.Obj_Gem + '</h3>' +
-            '<p style="font-size: 14px; color: #AABB1D">Funktion</p>' +
-            '<p style="font-size: 14px">' + currentFeature.properties.Obj_Funktion + '</p>' +
-            '<p style="font-size: 13px">' + currentFeature.properties.Obj_Qua1 + ' | ' + currentFeature.properties.Obj_Qua2 + ' | ' + currentFeature.properties.Obj_Qua2 + '</p>' +
-            '<p style="font-size: 14px; color: #AABB1D">Kommentar</p>' +
-            '<p style="font-size: 14px">' + truncate.apply(currentFeature.properties.Kommentar, [45, true]) + '</p>' + link + '&nbsp;&nbsp;&nbsp;' + details
+            '<h5>Funktion</h5>' +
+            '<p>' + currentFeature.properties.Obj_Funktion + '</p>' +
+             '<h5>Besondere Qualität</h5>' +
+           '<p>' + besquali + '</p>' +
+            '<h5>Kommentar</h5>' +
+            '<p style="font-size: 14px">' + truncate.apply(currentFeature.properties.Kommentar, [45, true]) + '</p>' + 
+            link + '&nbsp;&nbsp;&nbsp;' + details
         )
         .addTo(map);
 }

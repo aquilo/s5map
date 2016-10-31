@@ -16,6 +16,12 @@
     }
   }
 
+function random_lipsum($amount = 1, $what = ‘paras’, $start = 0) {
+
+return simplexml_load_file("http://www.lipsum.com/feed/xml?amount=$amount&what=$what&start=$start")->lipsum;
+
+}
+
 
 
   // echo '<pre>'; print_r($data); echo '</pre>';  
@@ -147,7 +153,9 @@
      <? } ?>
      <? if ($datai[10]) { ?>
     <p><? echo $datai[10]; ?></p>
-     <? } ?>
+     <? } else { ?>
+<p><? echo random_lipsum(); ?></p>
+      <? } ?>
 
      <p><a href="<? echo $datai[20]; ?>" target="_blank" style="color: #AABB1D;">Link zu weiteren Informationen</a>  </p>
 
