@@ -13,14 +13,15 @@
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
     <link href="s5map.css" rel="stylesheet">
     <link href="s5mapfilter.css" rel="stylesheet">
-    <style> #div2 {
-    white-space: nowrap;
-    width: 12em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    border: 1px solid #000000;
-}
-</style>
+    <style>
+    #div2 {
+        white-space: nowrap;
+        width: 12em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border: 1px solid #000000;
+    }
+    </style>
     <script>
     $(function() {
 
@@ -31,17 +32,18 @@
                 $(event.toElement).one('click', function(e) {
                     e.stopImmediatePropagation();
                 });
+            },
+            start: function(event, ui) {
+                $(this).addClass('noclick');
             }
+
         });
 
         $('#fktfilter').draggable({
-            stop: function(event, ui) {
-                // event.toElement is the element that was responsible
-                // for triggering this event. The handle, in case of a draggable.
-                $(event.toElement).one('click', function(e) {
-                    e.stopImmediatePropagation();
-                });
+            start: function(event, ui) {
+                $(this).addClass('noclick');
             }
+
         });
 
 
@@ -117,7 +119,7 @@
             <div class="qualiheader filterheader"><span>  +  Filtern nach Qualität</span></div>
             <div class="qualicontent" id="qualis">
                 <input type="checkbox" id="quali-91" checked>
-                <label for="quali-91" class="f91">Alle</label>
+                <label for="quali-91" style="background: rgb(230, 230, 230); color: black">Alle</label>
                 <input type="checkbox" id="quali-1" checked>
                 <label for="quali-1" class="quali">Ortsbild / Städtebau</label>
                 <input type="checkbox" id="quali-2" checked>

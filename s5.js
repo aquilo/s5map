@@ -399,12 +399,12 @@ function buildLocationList(places) {
         link.href = '#';
         link.className = 'title f' + funGrp(prop.OBJ_Fun_ID);
         link.placesPosition = i;
-        link.innerHTML = prop.Obj_Name;
+        link.innerHTML = prop.Obj_Name + ', ' + prop.Obj_Gem;
 
         var details = listing.appendChild(document.createElement('div'));
         details.innerHTML = prop.Kommentar;
         if (prop.Obj_Gem) {
-            details.innerHTML += ' &middot; ' + prop.Obj_Gem;
+//            details.innerHTML += ' &middot; ' + prop.Obj_Gem;
         }
         link.addEventListener('click', function(e) {
             var clickedListing = places.features[this.placesPosition];
