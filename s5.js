@@ -57,6 +57,27 @@ $.ajax({
             'data': places
         });
 
+/*        map.addLayer({
+            "id": "place",
+            "type": "symbol",
+            "source": "places",
+            "layout": {
+               // "circle-radius": 20,
+//                "icon-image": "marker.png",
+                "icon-image": "circle-11",
+               // "icon-opacity": 1,
+              //  "background-color": "red",
+              //  "circle-color": "#A00"
+              //  "icon-color": "#A00",
+     //           "text-field": "xxx",
+                "icon-ignore-placement": true,
+    //            "text-size": 60
+     //           "text-opacity": "0.5"
+     //"circle-blur": 1
+            }
+        });
+*/
+
         map.addSource("route", {
             "type": "geojson",
             "data": s5strecke
@@ -93,6 +114,14 @@ $.ajax({
                 var listing = document.getElementById('listing-' + i);
                 listing.classList.add('active');
 
+            });
+            $('#marker-' + i).hover(function(e) {
+               createMiniPopUp(feature);
+                var activeItem = document.getElementsByClassName('active');
+                e.stopPropagation();
+                if (activeItem[0]) {
+                    activeItem[0].classList.remove('active');
+                }
             });
         });
 
@@ -297,6 +326,7 @@ $.ajax({
                         "line-width": 5
                     }
                 });
+
             });
         }
 
@@ -318,13 +348,26 @@ $.ajax({
     });
 });
 
+var markerHeight = 30, markerRadius = 10, linearOffset = 25;
+var popupOffsets = {
+ 'top': [0, 0],
+ 'top-left': [0,0],
+ 'top-right': [0,0],
+ 'bottom': [0, -markerHeight],
+ 'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+ 'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+ 'left': [markerRadius, (markerHeight - markerRadius) * -1],
+ 'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+ };
+
 var popup = new mapboxgl.Popup({
+    offset: popupOffsets,
     closeButton: false,
     closeOnClick: false
 });
 
-map.on('mousemove', function(e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['route'] });
+/*map.on('mousemove', function(e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['place'] });
     console.log(features.length);
     // Change the cursor style as a UI indicator.
     map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
@@ -342,7 +385,7 @@ map.on('mousemove', function(e) {
         .setHTML(feature.properties.Obj_Name)
         .addTo(map);
 });
-
+*/
 
 // This is where your interactions with the placenr layer used to be
 // Now you have interactions with DOM markers instead
@@ -356,6 +399,9 @@ function flyToStore(currentFeature) {
 
 function createPopUp(currentFeature) {
     var popUps = document.getElementsByClassName('mapboxgl-popup');
+    if (popUps[0]) popUps[0].remove();
+
+    var popUps = document.getElementsByClassName('minipopup');
     if (popUps[0]) popUps[0].remove();
 
     var img = '';
@@ -392,6 +438,26 @@ function createPopUp(currentFeature) {
             '<p style="font-size: 14px">' + truncate.apply(currentFeature.properties.Kommentar, [45, true]) + '</p>' + 
             link + '&nbsp;&nbsp;&nbsp;' + details
         )
+        .addTo(map);
+}
+
+function createMiniPopUp(currentFeature) {
+    if ((currentFeature.properties.Obj_Name + ', ' + currentFeature.properties.Obj_Gem) == 
+    $('.mapboxgl-popup').find('h3').html() ) return;
+   var popUps = document.getElementsByClassName('mapboxgl-popup');
+    if (popUps[0]) popUps[0].remove();
+    var popUps = document.getElementsByClassName('minipopup');
+    if (popUps[0]) popUps[0].remove();
+
+
+    var popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: true
+        })
+        .setLngLat(currentFeature.geometry.coordinates)
+        .setHTML(
+            '<div class="minipopup"><h3>' + currentFeature.properties.Obj_Name + ', ' + currentFeature.properties.Obj_Gem + '</h3></div>'
+         )
         .addTo(map);
 }
 

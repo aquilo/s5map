@@ -24,8 +24,7 @@ body {
     background-image: url('http://stadtregion-s5.ch/img/HG.jpg');
     background-position: left top;
     background-repeat: no-repeat;
-
-}
+ }
 
 .pad2 {
     padding: 20px;
@@ -59,14 +58,10 @@ a:hover {
 }
 
 .heading {
-    background: #fff;
     border-bottom: 1px solid #eee;
     min-height: 60px;
     line-height: 60px;
     padding: 0 10px;
-    background-image: url('http://stadtregion-s5.ch/img/HG.jpg');
-    background-position: left top;
-    background-repeat: no-repeat;
 }
 
 .listings {
@@ -80,6 +75,7 @@ a:hover {
     border-bottom: 1px solid #eee;
     padding: 6px;
     text-decoration: none;
+    background: white;
 }
 
 .listings .item:last-child {
@@ -337,6 +333,22 @@ a:hover {
 
 
 /* Marker tweaks */
+.mapboxgl-popup-content div {
+    padding: 0 !important;
+}
+
+.mapboxgl-popup-content .minipopup h3 {
+    font: 400 13px/14px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+    padding: 4px;
+    color: #fff;
+    margin: 0;
+    display: block;
+    border-radius: 3px;
+    font-weight: 700;
+    margin-top: -5px;
+    line-height: 18px;
+    text-align: center;
+}
 
 .mapboxgl-popup {
     padding-bottom: 50px;
@@ -397,7 +409,6 @@ a:hover {
     display: block;
     padding: 4px 4px 0px 4px;
     font-weight: 300;
-    margin: 0;
     font-size: 14px;
     line-height: 18px;
 }
