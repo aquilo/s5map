@@ -164,7 +164,9 @@ return simplexml_load_file("http://www.lipsum.com/feed/xml?amount=$amount&what=$
 
 
      <br><br><br><hr>
-<a href="details.php?id=<? echo ($id - 1) ?>">prev</a> &nbsp;
+<? ?>
+
+<a href="details.php?id=<? echo max(0, ($id - 1)) ?>">prev</a> &nbsp;
 <a href="details.php?id=<? echo ($id + 1) ?>">next</a>
      <hr>
 <?

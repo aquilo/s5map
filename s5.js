@@ -8,11 +8,11 @@ if (!('remove' in Element.prototype)) {
     };
 }
 
-function truncate( n, useWordBoundary ){
+function truncate(n, useWordBoundary) {
     var isTooLong = this.length > n,
-        s_ = isTooLong ? this.substr(0,n-1) : this;
-        s_ = (useWordBoundary && isTooLong) ? s_.substr(0,s_.lastIndexOf(' ')) : s_;
-    return  isTooLong ? s_ + '&hellip;' : s_;
+        s_ = isTooLong ? this.substr(0, n - 1) : this;
+    s_ = (useWordBoundary && isTooLong) ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
+    return isTooLong ? s_ + '&hellip;' : s_;
 };
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2lqbmpqazdlMDBsdnRva284cWd3bm11byJ9.V6Hg2oYJwMAxeoR9GEzkAA';
@@ -57,26 +57,26 @@ $.ajax({
             'data': places
         });
 
-/*        map.addLayer({
-            "id": "place",
-            "type": "symbol",
-            "source": "places",
-            "layout": {
-               // "circle-radius": 20,
-//                "icon-image": "marker.png",
-                "icon-image": "circle-11",
-               // "icon-opacity": 1,
-              //  "background-color": "red",
-              //  "circle-color": "#A00"
-              //  "icon-color": "#A00",
-     //           "text-field": "xxx",
-                "icon-ignore-placement": true,
-    //            "text-size": 60
-     //           "text-opacity": "0.5"
-     //"circle-blur": 1
-            }
-        });
-*/
+        /*        map.addLayer({
+                    "id": "place",
+                    "type": "symbol",
+                    "source": "places",
+                    "layout": {
+                       // "circle-radius": 20,
+        //                "icon-image": "marker.png",
+                        "icon-image": "circle-11",
+                       // "icon-opacity": 1,
+                      //  "background-color": "red",
+                      //  "circle-color": "#A00"
+                      //  "icon-color": "#A00",
+             //           "text-field": "xxx",
+                        "icon-ignore-placement": true,
+            //            "text-size": 60
+             //           "text-opacity": "0.5"
+             //"circle-blur": 1
+                    }
+                });
+        */
 
         map.addSource("route", {
             "type": "geojson",
@@ -116,7 +116,7 @@ $.ajax({
 
             });
             $('#marker-' + i).hover(function(e) {
-               createMiniPopUp(feature);
+                createMiniPopUp(feature);
                 var activeItem = document.getElementsByClassName('active');
                 e.stopPropagation();
                 if (activeItem[0]) {
@@ -136,7 +136,7 @@ $.ajax({
                 "line-cap": "round"
             },
             "paint": {
-//                "line-color": "#f88",
+                //                "line-color": "#f88",
                 "line-color": "#AABB1D",
                 "line-width": 5
             }
@@ -189,7 +189,7 @@ $.ajax({
                 for (var i = 0; i < listings.length; i++) {
                     listings[i].style.display = how;
                 }
-                            var howb = how != 'none';
+                var howb = how != 'none';
 
                 listings = document.getElementById('qualis').children;
                 for (var i = 0; i < listings.length; i++) {
@@ -348,17 +348,19 @@ $.ajax({
     });
 });
 
-var markerHeight = 30, markerRadius = 10, linearOffset = 25;
+var markerHeight = 30,
+    markerRadius = 10,
+    linearOffset = 25;
 var popupOffsets = {
- 'top': [0, 0],
- 'top-left': [0,0],
- 'top-right': [0,0],
- 'bottom': [0, -markerHeight],
- 'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
- 'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
- 'left': [markerRadius, (markerHeight - markerRadius) * -1],
- 'right': [-markerRadius, (markerHeight - markerRadius) * -1]
- };
+    'top': [0, 0],
+    'top-left': [0, 0],
+    'top-right': [0, 0],
+    'bottom': [0, -markerHeight],
+    'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+    'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+    'left': [markerRadius, (markerHeight - markerRadius) * -1],
+    'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+};
 
 var popup = new mapboxgl.Popup({
     offset: popupOffsets,
@@ -432,19 +434,19 @@ function createPopUp(currentFeature) {
             '<h3>' + currentFeature.properties.Obj_Name + ', ' + currentFeature.properties.Obj_Gem + '</h3>' +
             '<h5>Funktion</h5>' +
             '<p>' + currentFeature.properties.Obj_Funktion + '</p>' +
-             '<h5>Besondere Qualität</h5>' +
-           '<p>' + besquali + '</p>' +
+            '<h5>Besondere Qualität</h5>' +
+            '<p>' + besquali + '</p>' +
             '<h5>Kommentar</h5>' +
-            '<p style="font-size: 14px">' + truncate.apply(currentFeature.properties.Kommentar, [45, true]) + '</p>' + 
+            '<p style="font-size: 14px">' + truncate.apply(currentFeature.properties.Kommentar, [45, true]) + '</p>' +
             link + '&nbsp;&nbsp;&nbsp;' + details
         )
         .addTo(map);
 }
 
 function createMiniPopUp(currentFeature) {
-    if ((currentFeature.properties.Obj_Name + ', ' + currentFeature.properties.Obj_Gem) == 
-    $('.mapboxgl-popup').find('h3').html() ) return;
-   var popUps = document.getElementsByClassName('mapboxgl-popup');
+    if ((currentFeature.properties.Obj_Name + ', ' + currentFeature.properties.Obj_Gem) ==
+        $('.mapboxgl-popup').find('h3').html()) return;
+    var popUps = document.getElementsByClassName('mapboxgl-popup');
     if (popUps[0]) popUps[0].remove();
     var popUps = document.getElementsByClassName('minipopup');
     if (popUps[0]) popUps[0].remove();
@@ -457,7 +459,7 @@ function createMiniPopUp(currentFeature) {
         .setLngLat(currentFeature.geometry.coordinates)
         .setHTML(
             '<div class="minipopup"><h3>' + currentFeature.properties.Obj_Name + ', ' + currentFeature.properties.Obj_Gem + '</h3></div>'
-         )
+        )
         .addTo(map);
 }
 
@@ -496,7 +498,7 @@ function buildLocationList(places) {
         var details = listing.appendChild(document.createElement('div'));
         details.innerHTML = prop.Kommentar;
         if (prop.Obj_Gem) {
-//            details.innerHTML += ' &middot; ' + prop.Obj_Gem;
+            //            details.innerHTML += ' &middot; ' + prop.Obj_Gem;
         }
         link.addEventListener('click', function(e) {
             var clickedListing = places.features[this.placesPosition];
@@ -510,4 +512,12 @@ function buildLocationList(places) {
 
         });
     }
+    $('.item').sort(function (a, b) {
+
+      var contentA = parseInt( $(a).attr('data-fktlis'));
+      var contentB = parseInt( $(b).attr('data-fktlis'));
+      contentA = 100 * funGrp(contentA) + contentA;
+      contentB = 100 * funGrp(contentB) + contentB;
+      return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+   })
 }
