@@ -157,7 +157,11 @@ return simplexml_load_file("http://www.lipsum.com/feed/xml?amount=$amount&what=$
 <p><? echo random_lipsum(); ?></p>
       <? } ?>
 
+      <? if ($datai[20] != "") { ?>
      <p><a href="<? echo $datai[20]; ?>" target="_blank" style="color: #AABB1D;">Link zu weiteren Informationen</a>  </p>
+
+  <?    } ?>
+
 
      <p>Erfasst am <? echo date("d.m.Y", 60*60*24*($datai[29] - 25569)); ?></p>
 
