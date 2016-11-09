@@ -473,6 +473,14 @@ function funGrp(fun) {
     }
 }
 
+function getSorted(selector, attrName) {
+    return $($(selector).toArray().sort(function(a, b) {
+        var aVal = a.getAttribute(attrName),
+            bVal = b.getAttribute(attrName);
+        return aVal > bVal;
+    }));
+}
+
 function buildLocationList(places) {
     for (var i = 0; i < places.features.length; i++) {
         var currentFeature = places.features[i];
@@ -483,6 +491,7 @@ function buildLocationList(places) {
         listing.className = 'item';
         listing.id = 'listing-' + i;
         listing.setAttribute('data-fktlis', prop.OBJ_Fun_ID);
+        listing.setAttribute('data-sorter', 100 * funGrp(prop.OBJ_Fun_ID) + prop.OBJ_Fun_ID + prop.Obj_Name.substr(0, 6));
         listing.setAttribute('data-qualilis1', prop.Obj_Qua1_ID);
         listing.setAttribute('data-qualilis2', prop.Obj_Qua2_ID);
         listing.setAttribute('data-qualilis3', prop.Obj_Qua3_ID);
@@ -512,12 +521,11 @@ function buildLocationList(places) {
 
         });
     }
-    $('.item').sort(function (a, b) {
 
-      var contentA = parseInt( $(a).attr('data-fktlis'));
-      var contentB = parseInt( $(b).attr('data-fktlis'));
-      contentA = 100 * funGrp(contentA) + contentA;
-      contentB = 100 * funGrp(contentB) + contentB;
-      return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
-   })
+    var alphabeticallyOrderedDivs = $('.item').sort(function(a, b) {
+        return String.prototype.localeCompare.call($(a).data('sorter').toLowerCase(), $(b).data('sorter').toLowerCase());
+    });
+
+    var container = $("#listings");
+    alphabeticallyOrderedDivs.detach().appendTo(container);
 }
