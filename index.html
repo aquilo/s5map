@@ -7,10 +7,14 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet'>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="jquery.qtip.min.js"></script>
+    <script src="lorem.js"></script>
+    <link href="jquery.qtip.min.css" rel="stylesheet">
     <link href="s5map.css" rel="stylesheet">
     <link href="s5mapfilter.css" rel="stylesheet">
     <style>
@@ -36,14 +40,12 @@
             start: function(event, ui) {
                 $(this).addClass('noclick');
             }
-
         });
 
         $('#fktfilter').draggable({
             start: function(event, ui) {
                 $(this).addClass('noclick');
             }
-
         });
 
 
@@ -57,7 +59,6 @@
                     return $content.is(":visible") ? "  x  Filtern nach Funktion" : "  +  Filtern nach Funktion";
                 });
             });
-
         });
 
         $(".qualiheader").click(function() {
@@ -68,10 +69,10 @@
                     return $content.is(":visible") ? "  x  Filtern nach Qualität" : "  +  Filtern nach Qualität";
                 });
             });
-
         });
 
     });
+
     </script>
 </head>
 
@@ -121,7 +122,7 @@
                 <input type="checkbox" id="quali-91" checked>
                 <label for="quali-91" style="background: rgb(230, 230, 230); color: black">Alle</label>
                 <input type="checkbox" id="quali-1" checked>
-                <label for="quali-1" class="quali">Ortsbild / Städtebau</label>
+                <label for="quali-1" class="quali" title="fsdafjlsdafj lsafjlsj flsdajf lsdajf lasdjflsa">Ortsbild / Städtebau</label>
                 <input type="checkbox" id="quali-2" checked>
                 <label for="quali-2" class="quali">Verdichtung / Nachverdichtung</label>
                 <input type="checkbox" id="quali-3" checked>

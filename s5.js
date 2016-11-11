@@ -43,6 +43,8 @@ https://docs.google.com/document/d/1T8s82w7HAidq8l49oHmVLcn4VYNrnbd5aIoGD4ukBps/
 var stores =
 */
 
+var lorem = new Lorem;
+
 $.ajax({
     //   url: "https://docs.google.com/document/d/1T8s82w7HAidq8l49oHmVLcn4VYNrnbd5aIoGD4ukBps/edit?usp=sharing"
     url: 'beispielobjektsammlung.geojson'
@@ -219,6 +221,22 @@ $.ajax({
         for (var j = 0; j < filterQualiGroup.length; j++) {
             filterQualiGroup[j].addEventListener('change', doQualiGroup);
         }
+
+        var qualis = $('.quali');
+        for (var j = 0; j < qualis.length; j++) {
+            var r = 5 + Math.round(Math.random() * 8);
+            qualis[j].title = lorem.createText(r, 3) + '.';
+        }
+
+        $('label[title]').qtip({
+            style: {
+                classes: 'myCustomClass'
+            },
+            position: {
+                my: "center center",
+                at: "center right"
+            }
+        });
 
         /*       for (var j = 0; j < listings.length; j++) {
                     listings[j].addEventListener('change', function(e) {
